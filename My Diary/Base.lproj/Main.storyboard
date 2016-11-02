@@ -86,10 +86,10 @@
             </objects>
             <point key="canvasLocation" x="1160.625" y="216.5492957746479"/>
         </scene>
-        <!--View Controller-->
+        <!--Note Detail View Controller-->
         <scene sceneID="Odd-5W-Rvi">
             <objects>
-                <viewController id="fNo-WP-uBz" sceneMemberID="viewController">
+                <viewController id="fNo-WP-uBz" customClass="NoteDetailViewController" customModule="My_Diary" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="OUD-gV-Usj"/>
                         <viewControllerLayoutGuide type="bottom" id="YsW-Ex-cLB"/>
@@ -98,23 +98,40 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2Ed-Wh-kPH">
-                                <rect key="frame" x="16" y="72" width="288" height="150"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" text="Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="gWi-Ga-f7I" customClass="NoteTextView" customModule="My_Diary" customModuleProvider="target">
+                                <rect key="frame" x="16" y="84" width="288" height="150"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="150" id="ika-Ek-9k4"/>
+                                    <constraint firstAttribute="height" constant="150" id="DLx-p7-3B3"/>
                                 </constraints>
-                                <nil key="textColor"/>
+                                <inset key="scrollIndicatorInsets" minX="10" minY="10" maxX="10" maxY="10"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
-                            </textField>
+                                <connections>
+                                    <outlet property="delegate" destination="fNo-WP-uBz" id="99p-c1-XxU"/>
+                                </connections>
+                            </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0/200" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sQc-hl-IrS">
+                                <rect key="frame" x="16" y="527" width="288" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="2Ed-Wh-kPH" firstAttribute="top" secondItem="OUD-gV-Usj" secondAttribute="bottom" constant="8" id="8pV-Gg-Uww"/>
-                            <constraint firstAttribute="leadingMargin" secondItem="2Ed-Wh-kPH" secondAttribute="leading" id="Kcp-tV-X1V"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="2Ed-Wh-kPH" secondAttribute="trailing" id="awg-jj-Q3P"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="sQc-hl-IrS" secondAttribute="trailing" id="5A2-a1-JIc"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="gWi-Ga-f7I" secondAttribute="trailing" id="Acs-xy-jaw"/>
+                            <constraint firstItem="YsW-Ex-cLB" firstAttribute="top" secondItem="sQc-hl-IrS" secondAttribute="bottom" constant="20" id="FJt-yx-MvI"/>
+                            <constraint firstItem="gWi-Ga-f7I" firstAttribute="top" secondItem="OUD-gV-Usj" secondAttribute="bottom" constant="20" id="Tmy-d2-0nM"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="gWi-Ga-f7I" secondAttribute="leading" id="XFf-9C-oyS"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="sQc-hl-IrS" secondAttribute="leading" id="o4s-vq-lLp"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="characterLimitLabel" destination="sQc-hl-IrS" id="kpe-JI-z6C"/>
+                        <outlet property="noteTextView" destination="gWi-Ga-f7I" id="pyR-5R-EJl"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Hw-Sp-aIt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

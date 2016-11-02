@@ -16,6 +16,8 @@
 		D487779B1DC9434900FED0D1 /* NotesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D487779A1DC9434900FED0D1 /* NotesTableViewController.swift */; };
 		D487779D1DC95BD300FED0D1 /* NoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D487779C1DC95BD300FED0D1 /* NoteCell.swift */; };
 		D487779F1DC95E3100FED0D1 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = D487779E1DC95E3100FED0D1 /* Utilities.swift */; };
+		D48777A51DC96D5E00FED0D1 /* NoteDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D48777A41DC96D5E00FED0D1 /* NoteDetailViewController.swift */; };
+		D48777A71DC972E400FED0D1 /* NoteTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D48777A61DC972E400FED0D1 /* NoteTextView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +44,8 @@
 		D487779A1DC9434900FED0D1 /* NotesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotesTableViewController.swift; sourceTree = "<group>"; };
 		D487779C1DC95BD300FED0D1 /* NoteCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteCell.swift; sourceTree = "<group>"; };
 		D487779E1DC95E3100FED0D1 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		D48777A41DC96D5E00FED0D1 /* NoteDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteDetailViewController.swift; sourceTree = "<group>"; };
+		D48777A61DC972E400FED0D1 /* NoteTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteTextView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,7 +90,9 @@
 				D48777761DC9409B00FED0D1 /* AppDelegate.swift */,
 				D487779E1DC95E3100FED0D1 /* Utilities.swift */,
 				D487779A1DC9434900FED0D1 /* NotesTableViewController.swift */,
+				D48777A41DC96D5E00FED0D1 /* NoteDetailViewController.swift */,
 				D487779C1DC95BD300FED0D1 /* NoteCell.swift */,
+				D48777A61DC972E400FED0D1 /* NoteTextView.swift */,
 				D487777A1DC9409B00FED0D1 /* Main.storyboard */,
 				D48777801DC9409B00FED0D1 /* Assets.xcassets */,
 				D487777D1DC9409B00FED0D1 /* My_Diary.xcdatamodeld */,
@@ -219,9 +225,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				D487777F1DC9409B00FED0D1 /* My_Diary.xcdatamodeld in Sources */,
+				D48777A51DC96D5E00FED0D1 /* NoteDetailViewController.swift in Sources */,
 				D48777771DC9409B00FED0D1 /* AppDelegate.swift in Sources */,
 				D487779B1DC9434900FED0D1 /* NotesTableViewController.swift in Sources */,
 				D487779F1DC95E3100FED0D1 /* Utilities.swift in Sources */,
+				D48777A71DC972E400FED0D1 /* NoteTextView.swift in Sources */,
 				D487779D1DC95BD300FED0D1 /* NoteCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
