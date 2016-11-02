@@ -30,9 +30,16 @@ class NoteCell: UITableViewCell {
     //---------------------
     //MARK: Functions
     //---------------------
-//    func configureCellWithNote(note: Note) {
-//        
-//        
-//    }
+    func configureCellWithNote(note: Note) {
+        
+        self.noteDateLabel.text = dateFormatter.string(from: note.date as Date)
+        self.noteTextLabel.text = note.text
+        
+        if let image = note.image {
+            
+            self.noteImageView.image = UIImage(data: image as Data)
+            self.noteImageView.roundImage()
+        }
+    }
 
 }

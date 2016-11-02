@@ -36,5 +36,11 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>My Diary needs access to your location so we can show you the places you have visited</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>My Diary needs access to your Photo Library so you can pick a photo</string>
+	<key>NSCameraUsageDescription</key>
+	<string>My Diary need access to your Camera so you can shoot your favorite picture</string>
 </dict>
 </plist>
