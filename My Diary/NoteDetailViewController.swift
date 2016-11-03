@@ -15,7 +15,7 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate {
     //MARK: Variables
     //---------------------
     var note: Note?
-    fileprivate let noteTextViewLimit = 200
+    fileprivate let noteTextViewLimit = 300
     fileprivate var locationManager: LocationManager!
     fileprivate var location: CLLocation?
     fileprivate var imageData: Data?
@@ -94,10 +94,32 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate {
                     
                     guard let name = placemark.name, let city = placemark.locality, let area = placemark.administrativeArea else { return }
                     
-                    self.locationLabel.text = "Location - \(name), \(city), \(area)"
+                    self.locationLabel.text = "\(name), \(city), \(area)"
                 }
             }
         }
+    }
+    
+    func addImageActionSheet() {
+        
+        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        let camera = UIAlertAction(title: "Take Photo", style: .default, handler: { (action) in
+            
+            self.mediaPickerManager.presentImagePickerController(animated: true, andSourceType: .camera)
+        })
+        actionSheet.addAction(camera)
+        
+        let photoLibrary = UIAlertAction(title: "Photo Library", style: .default, handler: { (action) in
+            
+            self.mediaPickerManager.presentImagePickerController(animated: true, andSourceType: .photoLibrary)
+        })
+        actionSheet.addAction(photoLibrary)
+        
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        actionSheet.addAction(cancel)
+        
+        self.present(actionSheet, animated: true, completion: nil)
     }
     
     func updateCharacterLimitLabel() {
@@ -149,7 +171,7 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate {
     
     @IBAction func addImage(_ sender: UIButton) {
 
-        mediaPickerManager.presentImagePickerController(animated: true)
+        addImageActionSheet()
     }
     
     @IBAction func saveNote(_ sender: UIBarButtonItem) {
