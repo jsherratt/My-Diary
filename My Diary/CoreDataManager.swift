@@ -99,13 +99,40 @@ public class CoreDataManager {
     //----------------------
     //MARK: Deleting
     //----------------------
-    func deleteEntry(note: Note) {
+    func deleteNote(note: Note) {
         
         managedObjectContext.delete(note)
         self.saveContext()
     }
-
+    
+    //----------------------
+    //MARK: Searching
+    //----------------------
+    func searchNote(withText text: String) -> [Note] {
+        
+        let fetchRequest: NSFetchRequest<Note> = Note.fetchRequest()
+        fetchRequest.entity = entityDescription
+        
+        let predicate = NSPredicate(format: "text contains[cd] %@", text)
+        fetchRequest.predicate = predicate
+        
+        let notes = try! managedObjectContext.fetch(fetchRequest)
+        
+        return notes
+    }
+    
 }
+
+
+
+
+
+
+
+
+
+
+
 
 
 

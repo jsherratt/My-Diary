@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class NotesTableViewController: UITableViewController {
+class NotesTableViewController: UITableViewController, UISearchBarDelegate {
     
     //---------------------
     //MARK: Variables
@@ -17,6 +17,7 @@ class NotesTableViewController: UITableViewController {
     let coreDataManager = CoreDataManager.sharedInstance
     var selectedNote: Note?
     var notes: [Note] = []
+    var searchController = UISearchController(searchResultsController: nil)
     
     //---------------------
     //MARK: View
@@ -31,6 +32,13 @@ class NotesTableViewController: UITableViewController {
         
         //Set fetched results controller delegate
         coreDataManager.fetchedResultsController.delegate = self
+        
+        //Configure seach bar
+        searchController.searchResultsUpdater = self
+        searchController.dimsBackgroundDuringPresentation = false
+        definesPresentationContext = true
+        self.searchController.searchBar.delegate = self
+        tableView.tableHeaderView = searchController.searchBar
         
         //Fetch results
         fetchResults()
@@ -60,9 +68,16 @@ class NotesTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        if let notes = coreDataManager.fetchedResultsController.fetchedObjects?.count {
+        if searchController.isActive {
             
-            return notes
+            return self.notes.count
+            
+        }else {
+    
+            if let notes = coreDataManager.fetchedResultsController.fetchedObjects?.count {
+
+                return notes
+            }
         }
         return 1
     }
@@ -72,9 +87,16 @@ class NotesTableViewController: UITableViewController {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "NoteCell", for: indexPath) as! NoteCell
         
-        let note = coreDataManager.fetchedResultsController.object(at: indexPath)
-
-        cell.configureCellWithNote(note: note)
+        if searchController.isActive {
+            
+            let note = notes[indexPath.row]
+            cell.configureCellWithNote(note: note)
+            
+        }else {
+            
+            let note = coreDataManager.fetchedResultsController.object(at: indexPath)
+            cell.configureCellWithNote(note: note)
+        }
 
         return cell
     }
@@ -83,7 +105,14 @@ class NotesTableViewController: UITableViewController {
         
         self.tableView.deselectRow(at: indexPath, animated: true)
         
-        selectedNote = coreDataManager.fetchedResultsController.object(at: indexPath)
+        if searchController.isActive {
+            
+            selectedNote = notes[indexPath.row]
+            
+        }else {
+            
+            selectedNote = coreDataManager.fetchedResultsController.object(at: indexPath)
+        }
         
         performSegue(withIdentifier: "ShowNote", sender: self)
     }
@@ -92,8 +121,16 @@ class NotesTableViewController: UITableViewController {
         
         if editingStyle == .delete {
             
-            let note = coreDataManager.fetchedResultsController.object(at: indexPath)
-            coreDataManager.deleteEntry(note: note)
+            if searchController.isActive {
+                
+                let note = notes[indexPath.row]
+                coreDataManager.deleteNote(note: note)
+                
+            }else {
+                
+                let note = coreDataManager.fetchedResultsController.object(at: indexPath)
+                coreDataManager.deleteNote(note: note)
+            }
         }
     }
     
@@ -127,6 +164,17 @@ extension NotesTableViewController: NSFetchedResultsControllerDelegate {
     //-------------------------------
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         
+        self.tableView.reloadData()
+    }
+}
+
+extension NotesTableViewController: UISearchResultsUpdating {
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        
+        if let searchText = searchController.searchBar.text {
+            self.notes = coreDataManager.searchNote(withText: searchText)
+        }
         self.tableView.reloadData()
     }
 }
