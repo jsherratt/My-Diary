@@ -85,7 +85,7 @@ public class CoreDataManager {
     }
     
     //Save location
-    fileprivate func saveLocation(withLatitude latitude: Double, andLongitude longitude: Double, andNote note: Note) -> Location {
+     func saveLocation(withLatitude latitude: Double, andLongitude longitude: Double, andNote note: Note) -> Location {
         
         let entityDescription = NSEntityDescription.entity(forEntityName: "Location", in: self.managedObjectContext)!
         let location = Location(entity: entityDescription, insertInto: self.managedObjectContext)
@@ -97,7 +97,7 @@ public class CoreDataManager {
     }
     
     //----------------------
-    //MARK: Saving
+    //MARK: Deleting
     //----------------------
     func deleteEntry(note: Note) {
         

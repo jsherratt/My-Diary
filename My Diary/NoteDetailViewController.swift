@@ -54,8 +54,11 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate {
         noteImageView.clipsToBounds = true
         
         if let note = self.note {
-            
+            print("Old Note")
             configureViewWith(note: note)
+
+        }else {
+            print("New Note")
         }
     }
     
@@ -69,6 +72,7 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate {
         updateCharacterLimitLabel()
         
         if let image = note.image {
+            self.imageData = image as Data
             self.noteImageView.image = UIImage(data: image as Data)
             addImageButton.setTitle("Change Image", for: .normal)
         }
@@ -184,12 +188,23 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate {
             
             if let imageData = self.imageData {
                 note.image = imageData as NSData
+            }else {
+                note.image = nil
             }
+            
+            if let location = self.location {
+                note.location = coreDataManager.saveLocation(withLatitude: location.coordinate.latitude, andLongitude: location.coordinate.longitude, andNote: note)
+            }
+            
             coreDataManager.saveContext()
+            
         }else {
             coreDataManager.saveNote(withText: text, andImageData: self.imageData, andLocation: self.location)
         }
-        self.dismiss(animated: true, completion: nil)
+        self.dismiss(animated: true) {
+            self.imageData = nil
+            self.location = nil
+        }
     }
     
     @IBAction func cancle(_ sender: UIBarButtonItem) {

@@ -73,6 +73,7 @@ class NotesTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "NoteCell", for: indexPath) as! NoteCell
         
         let note = coreDataManager.fetchedResultsController.object(at: indexPath)
+
         cell.configureCellWithNote(note: note)
 
         return cell
