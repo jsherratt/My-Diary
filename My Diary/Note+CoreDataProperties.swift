@@ -14,7 +14,7 @@ extension Note {
     @nonobjc public class func fetchRequest() -> NSFetchRequest<Note> {
         
         let fetchRequest = NSFetchRequest<Note>(entityName: "Note")
-        let sortDescriptor = NSSortDescriptor(key: "text", ascending: true)
+        let sortDescriptor = NSSortDescriptor(key: "date", ascending: false)
         fetchRequest.sortDescriptors = [sortDescriptor]
         
         return fetchRequest

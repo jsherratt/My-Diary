@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="NoteCell" rowHeight="80" id="jC7-fO-hrj" customClass="NoteCell" customModule="My_Diary" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="NoteCell" rowHeight="80" id="jC7-fO-hrj" customClass="NoteCell" customModule="My_Diary" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="320" height="80"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jC7-fO-hrj" id="A3n-XC-hwX">
@@ -78,7 +78,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <segue destination="Hca-tr-IPa" kind="show" identifier="ExistingNote" id="XkO-SS-wh5"/>
+                        <segue destination="Hca-tr-IPa" kind="show" identifier="ShowNote" id="XkO-SS-wh5"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vn7-TT-5Tb" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -122,7 +122,7 @@
                                     <constraint firstAttribute="height" constant="25" id="5sh-Jr-1PR"/>
                                     <constraint firstAttribute="width" constant="80" id="MVF-9j-60V"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="13"/>
                                 <color key="textColor" red="0.52941176470588236" green="0.52941176470588236" blue="0.52941176470588236" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -157,15 +157,6 @@
                                     <constraint firstAttribute="height" constant="18" id="d05-w2-JgQ"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
-                                <color key="textColor" red="0.52941176469999995" green="0.52941176469999995" blue="0.52941176469999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date - " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="19P-t3-xXW">
-                                <rect key="frame" x="16" y="72" width="288" height="21"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="21" id="Bfw-Sl-DZk"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                 <color key="textColor" red="0.52941176469999995" green="0.52941176469999995" blue="0.52941176469999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -220,12 +211,9 @@
                             <constraint firstItem="YsW-Ex-cLB" firstAttribute="top" secondItem="2nF-MH-oZF" secondAttribute="bottom" constant="20" id="I8g-4T-LxJ"/>
                             <constraint firstAttribute="leadingMargin" secondItem="XE6-nd-HoA" secondAttribute="leading" id="Ifs-gj-m2r"/>
                             <constraint firstItem="fQk-UE-BPh" firstAttribute="top" secondItem="gWi-Ga-f7I" secondAttribute="bottom" constant="8" id="Kzj-m2-quA"/>
-                            <constraint firstItem="19P-t3-xXW" firstAttribute="top" secondItem="OUD-gV-Usj" secondAttribute="bottom" constant="8" id="LgN-vn-sI8"/>
                             <constraint firstItem="gWi-Ga-f7I" firstAttribute="top" secondItem="OUD-gV-Usj" secondAttribute="bottom" constant="40" id="Tmy-d2-0nM"/>
                             <constraint firstAttribute="leadingMargin" secondItem="gWi-Ga-f7I" secondAttribute="leading" id="XFf-9C-oyS"/>
                             <constraint firstItem="sQc-hl-IrS" firstAttribute="top" secondItem="gWi-Ga-f7I" secondAttribute="bottom" constant="8" id="XyN-rJ-Fev"/>
-                            <constraint firstAttribute="leadingMargin" secondItem="19P-t3-xXW" secondAttribute="leading" id="e2h-ZL-3Yd"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="19P-t3-xXW" secondAttribute="trailing" id="juS-gc-CcH"/>
                             <constraint firstItem="gue-65-Yoz" firstAttribute="centerY" secondItem="XE6-nd-HoA" secondAttribute="centerY" id="rnN-Ki-bhM"/>
                         </constraints>
                         <connections>
@@ -233,6 +221,12 @@
                         </connections>
                     </view>
                     <navigationItem key="navigationItem" id="XRV-yA-fLM">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="5u3-vn-Ub3">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="cancle:" destination="fNo-WP-uBz" id="CzT-oD-ljO"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="xRF-ng-5zj">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
@@ -242,8 +236,9 @@
                     </navigationItem>
                     <connections>
                         <outlet property="activityIndicator" destination="gue-65-Yoz" id="WAZ-L6-0W9"/>
+                        <outlet property="addImageButton" destination="BUR-Jh-L5O" id="g6R-DT-CmW"/>
+                        <outlet property="addLocationStackView" destination="fQk-UE-BPh" id="2YR-Wf-gyT"/>
                         <outlet property="characterLimitLabel" destination="sQc-hl-IrS" id="kpe-JI-z6C"/>
-                        <outlet property="dateLabel" destination="19P-t3-xXW" id="PaU-ZH-Cf8"/>
                         <outlet property="locationLabel" destination="XE6-nd-HoA" id="8wh-8R-52E"/>
                         <outlet property="noteImageView" destination="2nF-MH-oZF" id="5Uw-MX-xVT"/>
                         <outlet property="noteTextView" destination="gWi-Ga-f7I" id="H2o-CH-2lR"/>
@@ -307,6 +302,6 @@
         <image name="icn_noimage" width="47" height="47"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="lQp-GQ-dk8"/>
+        <segue reference="XkO-SS-wh5"/>
     </inferredMetricsTieBreakers>
 </document>

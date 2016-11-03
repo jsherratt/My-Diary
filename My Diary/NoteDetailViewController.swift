@@ -30,12 +30,13 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate {
     //---------------------
     //MARK: Outlets
     //---------------------
-    @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var noteTextView: KMPlaceholderTextView!
     @IBOutlet weak var characterLimitLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var noteImageView: UIImageView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var addLocationStackView: UIStackView!
+    @IBOutlet weak var addImageButton: UIButton!
     
     //---------------------
     //MARK: View
@@ -45,11 +46,68 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate {
         
         //Customise navigation bar
         navigationController?.navigationBar.tintColor = UIColor.white
+        navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
+        navigationItem.title = "\(dateFormatter.string(from: Date()))"
         
-        dateLabel.text = "Date - \(dateFormatter.string(from: Date()))"
-        
+        //Round corners of image
         noteImageView.layer.cornerRadius = 5
         noteImageView.clipsToBounds = true
+        
+        if let note = self.note {
+            
+            configureViewWith(note: note)
+        }
+    }
+    
+    //---------------------
+    //MARK: Functions
+    //---------------------
+    func configureViewWith(note: Note) {
+        
+        noteTextView.text = note.text
+        
+        updateCharacterLimitLabel()
+        
+        if let image = note.image {
+            self.noteImageView.image = UIImage(data: image as Data)
+            addImageButton.setTitle("Change Image", for: .normal)
+        }
+        
+        if let location = note.location {
+            
+            locationManager = LocationManager()
+            
+            let latitude = location.latitude
+            let longitde = location.longitude
+            
+            let locationToReverse = CLLocation(latitude: latitude, longitude: longitde)
+            
+            locationManager.getPlacemark(forLocation: locationToReverse) { (originPlacemark, error) in
+                
+                if let error = error {
+                    print(error)
+                    
+                } else if let placemark = originPlacemark {
+                    
+                    guard let name = placemark.name, let city = placemark.locality, let area = placemark.administrativeArea else { return }
+                    
+                    self.locationLabel.text = "Location - \(name), \(city), \(area)"
+                    self.addLocationStackView.isHidden = true
+                }
+            }
+        }
+    }
+    
+    func updateCharacterLimitLabel() {
+        
+        let characterLimitCount = "\(noteTextView.text.characters.count)" + "/\(noteTextViewLimit)"
+        let textToChange = "\(noteTextView.text.characters.count)"
+        
+        let range = (characterLimitCount as NSString).range(of: textToChange)
+        let attributedString = NSMutableAttributedString(string: characterLimitCount)
+        attributedString.addAttribute(NSForegroundColorAttributeName, value: UIColor(red: 109/255.0, green: 152/255.0, blue: 93/255.0, alpha: 1), range: range)
+        
+        characterLimitLabel.attributedText = attributedString
     }
     
     //---------------------
@@ -99,6 +157,7 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate {
         if let note = self.note {
             
             note.text = text
+            
             if let imageData = self.imageData {
                 note.image = imageData as NSData
             }
@@ -109,6 +168,11 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate {
         self.dismiss(animated: true, completion: nil)
     }
     
+    @IBAction func cancle(_ sender: UIBarButtonItem) {
+        
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     //-------------------------
     //MARK: Text View Delegate
     //-------------------------
@@ -116,7 +180,7 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate {
     //Update the characterLimitLabel when user is typing
     func textViewDidChange(_ textView: UITextView) {
         
-         characterLimitLabel.text = "\(noteTextView.text.characters.count)/\(noteTextViewLimit)"
+        updateCharacterLimitLabel()
     }
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
@@ -144,6 +208,9 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate {
 
 }
 
+//---------------------
+//MARK: Extension
+//---------------------
 extension NoteDetailViewController: MediaPickerManagerDelegate {
     
     func mediaPickerManager(manager: MediaPickerManager, didFinishPickingImage image: UIImage) {
@@ -153,7 +220,6 @@ extension NoteDetailViewController: MediaPickerManagerDelegate {
         
         manager.dismissImagePickerController(animated: true)
     }
-    
 }
 
 

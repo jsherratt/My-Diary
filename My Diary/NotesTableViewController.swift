@@ -15,12 +15,8 @@ class NotesTableViewController: UITableViewController {
     //MARK: Variables
     //---------------------
     let coreDataManager = CoreDataManager.sharedInstance
+    var selectedNote: Note?
     var notes: [Note] = []
-    
-    //---------------------
-    //MARK: Outlets
-    //---------------------
-    
     
     //---------------------
     //MARK: View
@@ -28,11 +24,17 @@ class NotesTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //Customise navigation bar
+        navigationController?.navigationBar.tintColor = UIColor.white
+        navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
+        navigationItem.title = "Notes"
+        
         //Set fetched results controller delegate
         coreDataManager.fetchedResultsController.delegate = self
         
         //Fetch results
         fetchResults()
+        
     }
     
     //---------------------
@@ -59,6 +61,7 @@ class NotesTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if let notes = coreDataManager.fetchedResultsController.fetchedObjects?.count {
+            
             return notes
         }
         return 1
@@ -69,7 +72,7 @@ class NotesTableViewController: UITableViewController {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "NoteCell", for: indexPath) as! NoteCell
         
-        let note = notes[indexPath.row]
+        let note = coreDataManager.fetchedResultsController.object(at: indexPath)
         cell.configureCellWithNote(note: note)
 
         return cell
@@ -77,11 +80,35 @@ class NotesTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-
+        self.tableView.deselectRow(at: indexPath, animated: true)
+        
+        selectedNote = coreDataManager.fetchedResultsController.object(at: indexPath)
+        
+        performSegue(withIdentifier: "ShowNote", sender: self)
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        
+        if editingStyle == .delete {
+            
+            let note = coreDataManager.fetchedResultsController.object(at: indexPath)
+            coreDataManager.deleteEntry(note: note)
+        }
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 80
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "ShowNote" {
+            
+            let destination = segue.destination as! UINavigationController
+            let noteDetailVc = destination.topViewController as! NoteDetailViewController
+            
+            noteDetailVc.note = selectedNote
+        }
     }
  
     override func didReceiveMemoryWarning() {

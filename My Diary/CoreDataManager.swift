@@ -56,6 +56,7 @@ public class CoreDataManager {
             
             do {
                 try self.managedObjectContext.save()
+                print("Save successfull")
             } catch {
                 let nserror = error as NSError
                 fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
@@ -95,17 +96,36 @@ public class CoreDataManager {
         return location
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+    //----------------------
+    //MARK: Saving
+    //----------------------
+    func deleteEntry(note: Note) {
+        
+        managedObjectContext.delete(note)
+        self.saveContext()
+    }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
