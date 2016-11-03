@@ -136,7 +136,7 @@
                                             <constraint firstAttribute="height" constant="25" id="UQq-ot-Iu8"/>
                                         </constraints>
                                     </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZVd-QA-6oD">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZVd-QA-6oD">
                                         <rect key="frame" x="30" y="0.0" width="78" height="25"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="25" id="CTS-ou-J97"/>
@@ -237,7 +237,7 @@
                     <connections>
                         <outlet property="activityIndicator" destination="gue-65-Yoz" id="WAZ-L6-0W9"/>
                         <outlet property="addImageButton" destination="BUR-Jh-L5O" id="g6R-DT-CmW"/>
-                        <outlet property="addLocationStackView" destination="fQk-UE-BPh" id="2YR-Wf-gyT"/>
+                        <outlet property="addLocationButton" destination="ZVd-QA-6oD" id="oVO-F3-aFf"/>
                         <outlet property="characterLimitLabel" destination="sQc-hl-IrS" id="kpe-JI-z6C"/>
                         <outlet property="locationLabel" destination="XE6-nd-HoA" id="8wh-8R-52E"/>
                         <outlet property="noteImageView" destination="2nF-MH-oZF" id="5Uw-MX-xVT"/>

@@ -35,7 +35,7 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var noteImageView: UIImageView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    @IBOutlet weak var addLocationStackView: UIStackView!
+    @IBOutlet weak var addLocationButton: UIButton!
     @IBOutlet weak var addImageButton: UIButton!
     
     //---------------------
@@ -75,6 +75,9 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate {
         
         if let location = note.location {
             
+            addLocationButton.setTitle("Location", for: .normal)
+            addLocationButton.isEnabled = false
+            
             locationManager = LocationManager()
             
             let latitude = location.latitude
@@ -92,7 +95,6 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate {
                     guard let name = placemark.name, let city = placemark.locality, let area = placemark.administrativeArea else { return }
                     
                     self.locationLabel.text = "Location - \(name), \(city), \(area)"
-                    self.addLocationStackView.isHidden = true
                 }
             }
         }
