@@ -40,7 +40,8 @@ class NoteCell: UITableViewCell {
             self.noteImageView.image = UIImage(data: image as Data)
             self.noteImageView.roundImage()
         }else {
-            print("No image to set")
+            self.noteImageView.image = UIImage(named: "icn_noimage")
+            self.noteImageView.roundImage()
         }
     }
 
