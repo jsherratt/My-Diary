@@ -49,16 +49,13 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate {
         navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
         navigationItem.title = "\(dateFormatter.string(from: Date()))"
         
-        //Round corners of image
-        noteImageView.layer.cornerRadius = 5
-        noteImageView.clipsToBounds = true
+        //Position label text top left
+        locationLabel.sizeToFit()
         
+        //Check if note exists
         if let note = self.note {
-            print("Old Note")
             configureViewWith(note: note)
-
         }else {
-            print("New Note")
         }
     }
     
@@ -98,7 +95,7 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate {
                     
                     guard let name = placemark.name, let city = placemark.locality, let area = placemark.administrativeArea else { return }
                     
-                    self.locationLabel.text = "\(name), \(city), \(area)"
+                    self.locationLabel.text = "Location\n \(name), \(city), \(area)"
                 }
             }
         }
@@ -107,6 +104,15 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate {
     func addImageActionSheet() {
         
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        //If user is using iPad
+        if UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.pad {
+            
+            if let popOverController = actionSheet.popoverPresentationController {
+                popOverController.sourceView = addImageButton
+                popOverController.sourceRect = addImageButton.bounds
+            }
+        }
         
         let camera = UIAlertAction(title: "Take Photo", style: .default, handler: { (action) in
             
@@ -168,7 +174,7 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate {
                 
                 guard let name = placemark.name, let city = placemark.locality, let area = placemark.administrativeArea else { return }
                 
-                self.locationLabel.text = "Location - \(name), \(city), \(area)"
+                self.locationLabel.text = "Location\n \(name), \(city), \(area)"
             }
         }
     }
@@ -206,10 +212,11 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate {
             self.location = nil
         }
     }
-    
-    @IBAction func cancle(_ sender: UIBarButtonItem) {
+
+    @IBAction func cancel(_ sender: UIBarButtonItem) {
         
         self.dismiss(animated: true, completion: nil)
+
     }
     
     //-------------------------

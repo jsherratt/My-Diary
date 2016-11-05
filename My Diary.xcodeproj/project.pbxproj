@@ -25,6 +25,9 @@
 		D487779D1DC95BD300FED0D1 /* NoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D487779C1DC95BD300FED0D1 /* NoteCell.swift */; };
 		D487779F1DC95E3100FED0D1 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = D487779E1DC95E3100FED0D1 /* Utilities.swift */; };
 		D48777A51DC96D5E00FED0D1 /* NoteDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D48777A41DC96D5E00FED0D1 /* NoteDetailViewController.swift */; };
+		D4B7EE421DCE92A3005C144F /* PreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B7EE411DCE92A3005C144F /* PreviewViewController.swift */; };
+		D4C95AF31DCE8746003971D5 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C95AF21DCE8746003971D5 /* SettingsTableViewController.swift */; };
+		D4C95AF51DCE8BD0003971D5 /* AuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C95AF41DCE8BD0003971D5 /* AuthenticationViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +63,9 @@
 		D487779C1DC95BD300FED0D1 /* NoteCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteCell.swift; sourceTree = "<group>"; };
 		D487779E1DC95E3100FED0D1 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		D48777A41DC96D5E00FED0D1 /* NoteDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteDetailViewController.swift; sourceTree = "<group>"; };
+		D4B7EE411DCE92A3005C144F /* PreviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewViewController.swift; sourceTree = "<group>"; };
+		D4C95AF21DCE8746003971D5 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
+		D4C95AF41DCE8BD0003971D5 /* AuthenticationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,6 +140,9 @@
 				D48777761DC9409B00FED0D1 /* AppDelegate.swift */,
 				D487779A1DC9434900FED0D1 /* NotesTableViewController.swift */,
 				D48777A41DC96D5E00FED0D1 /* NoteDetailViewController.swift */,
+				D4B7EE411DCE92A3005C144F /* PreviewViewController.swift */,
+				D4C95AF21DCE8746003971D5 /* SettingsTableViewController.swift */,
+				D4C95AF41DCE8BD0003971D5 /* AuthenticationViewController.swift */,
 				D487779C1DC95BD300FED0D1 /* NoteCell.swift */,
 				D40C83021DC9C0A200CF3D04 /* Core Data Model */,
 				D40C82FF1DC9B27700CF3D04 /* Helpers */,
@@ -272,6 +281,7 @@
 				D40C830C1DC9C43500CF3D04 /* Location+CoreDataClass.swift in Sources */,
 				D487777F1DC9409B00FED0D1 /* My_Diary.xcdatamodeld in Sources */,
 				D40B99F91DC9A128007133A4 /* KMPlaceholderTextView.swift in Sources */,
+				D4B7EE421DCE92A3005C144F /* PreviewViewController.swift in Sources */,
 				D48777A51DC96D5E00FED0D1 /* NoteDetailViewController.swift in Sources */,
 				D48777771DC9409B00FED0D1 /* AppDelegate.swift in Sources */,
 				D40C82FE1DC9B26900CF3D04 /* LocationManager.swift in Sources */,
@@ -280,8 +290,10 @@
 				D40C83011DC9BA4000CF3D04 /* MediaPickerManager.swift in Sources */,
 				D40C83061DC9C1F900CF3D04 /* Note+CoreDataProperties.swift in Sources */,
 				D487779F1DC95E3100FED0D1 /* Utilities.swift in Sources */,
+				D4C95AF31DCE8746003971D5 /* SettingsTableViewController.swift in Sources */,
 				D40C830A1DC9C3FA00CF3D04 /* Note+CoreDataClass.swift in Sources */,
 				D40C83041DC9C0C900CF3D04 /* CoreDataManager.swift in Sources */,
+				D4C95AF51DCE8BD0003971D5 /* AuthenticationViewController.swift in Sources */,
 				D487779D1DC95BD300FED0D1 /* NoteCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

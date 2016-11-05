@@ -36,9 +36,9 @@ class NoteCell: UITableViewCell {
         self.noteTextLabel.text = note.text
         
         if let image = note.image {
-            print("Image to set")
             self.noteImageView.image = UIImage(data: image as Data)
             self.noteImageView.roundImage()
+            
         }else {
             self.noteImageView.image = UIImage(named: "icn_noimage")
             self.noteImageView.roundImage()

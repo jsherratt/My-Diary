@@ -20,6 +20,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         UIApplication.shared.statusBarStyle = .lightContent
+        
+        let newNoteShortcut = UIMutableApplicationShortcutItem(type: "NewNote",
+                                                               localizedTitle: "Create New Note",
+                                                               localizedSubtitle: nil,
+                                                               icon: UIApplicationShortcutIcon(type: .add),
+                                                               userInfo: nil
+        )
+        
+        application.shortcutItems = [newNoteShortcut]
 
         return true
     }
@@ -48,5 +57,47 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         coreDataManager.saveContext()
     }
+    
+    func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
+        
+        switch shortcutItem.type {
+            
+        case "NewNote":
+            
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let noteDetailVc = storyboard.instantiateViewController(withIdentifier: "NoteDetailNavVc") as! UINavigationController
+            let rootVc = UIApplication.shared.keyWindow?.rootViewController
+            
+            rootVc?.present(noteDetailVc, animated: false, completion: {
+                
+                completionHandler(true)
+            })
+            
+        default:
+            break
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

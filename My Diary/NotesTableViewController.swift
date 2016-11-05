@@ -8,6 +8,9 @@
 
 import UIKit
 import CoreData
+import LocalAuthentication
+
+var hasAuthenticated = false
 
 class NotesTableViewController: UITableViewController, UISearchBarDelegate {
     
@@ -18,6 +21,13 @@ class NotesTableViewController: UITableViewController, UISearchBarDelegate {
     var selectedNote: Note?
     var notes: [Note] = []
     var searchController = UISearchController(searchResultsController: nil)
+    let authenticationContext = LAContext()
+    var error: NSError?
+    
+    //---------------------
+    //MARK: Outlets
+    //---------------------
+    @IBOutlet var noteTableView: UITableView!
     
     //---------------------
     //MARK: View
@@ -38,11 +48,34 @@ class NotesTableViewController: UITableViewController, UISearchBarDelegate {
         searchController.dimsBackgroundDuringPresentation = false
         definesPresentationContext = true
         self.searchController.searchBar.delegate = self
-        tableView.tableHeaderView = searchController.searchBar
+        noteTableView.tableHeaderView = searchController.searchBar
         
         //Fetch results
         fetchResults()
         
+        //Check if user had 3d touch capability
+        if traitCollection.forceTouchCapability == .available {
+            registerForPreviewing(with: self, sourceView: self.tableView)
+            print("Can use 3D touch")
+        }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        //Touch ID
+        
+//        if authenticationContext.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
+//            
+//            if hasAuthenticated == false {
+//                performSegue(withIdentifier: "TouchID", sender: self)
+//            }
+//            
+//        }else {
+//            
+//            //No biometrics
+//            showAlert(with: "Error", andMessage: "This device does not have a Touch ID sensor")
+//        }
     }
     
     //---------------------
@@ -103,7 +136,7 @@ class NotesTableViewController: UITableViewController, UISearchBarDelegate {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        self.tableView.deselectRow(at: indexPath, animated: true)
+        noteTableView.deselectRow(at: indexPath, animated: true)
         
         if searchController.isActive {
             
@@ -155,7 +188,7 @@ class NotesTableViewController: UITableViewController, UISearchBarDelegate {
 }
 
 //---------------------
-//MARK: Extension
+//MARK: Extensions
 //---------------------
 extension NotesTableViewController: NSFetchedResultsControllerDelegate {
     
@@ -164,7 +197,7 @@ extension NotesTableViewController: NSFetchedResultsControllerDelegate {
     //-------------------------------
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         
-        self.tableView.reloadData()
+        noteTableView.reloadData()
     }
 }
 
@@ -175,7 +208,38 @@ extension NotesTableViewController: UISearchResultsUpdating {
         if let searchText = searchController.searchBar.text {
             self.notes = coreDataManager.searchNote(withText: searchText)
         }
-        self.tableView.reloadData()
+        noteTableView.reloadData()
+    }
+}
+
+extension NotesTableViewController: UIViewControllerPreviewingDelegate {
+    
+    //Peek
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+        
+        guard let indexPath = noteTableView.indexPathForRow(at: location), let cell = noteTableView.cellForRow(at: indexPath) else { return nil }
+        
+        guard let previewVc = storyboard?.instantiateViewController(withIdentifier: "PreviewVc") as? PreviewViewController else { return nil }
+        
+        previewVc.note = coreDataManager.fetchedResultsController.object(at: indexPath)
+        selectedNote = coreDataManager.fetchedResultsController.object(at: indexPath)
+        
+        previewVc.preferredContentSize = CGSize(width: 0, height: 0)
+        
+        previewingContext.sourceRect = cell.frame
+        
+        return previewVc
+    }
+    
+    //Pop
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
+        
+        if let previewVc = storyboard?.instantiateViewController(withIdentifier: "PreviewVc") as? PreviewViewController {
+            
+            previewVc.note = selectedNote
+            
+            show(previewVc, sender: self)
+        }
     }
 }
 
