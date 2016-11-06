@@ -17,36 +17,38 @@ class AuthenticationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //Authenticate
         authentication()
     }
     
+    //---------------------
+    //MARK: Functions
+    //---------------------
     func authentication() {
         
         let authenticationContext = LAContext()
         var error: NSError?
         
+        //Check if device support touch id
         if authenticationContext.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
             
-            authenticationContext.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: "Authenticate to view notes", reply: { (success, error) in
+            authenticationContext.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: "Authenticate to view notes", reply: { success, error -> Void in
                 
-                if success {
+                DispatchQueue.main.async {
                     
-                    DispatchQueue.main.async {
+                    if success {
                         
-                        self.dismiss(animated: false, completion: {
+                        hasAuthenticated = true
+                        self.dismiss(animated: true, completion: nil)
+                        
+                    }else {
+                        if let error = error as? NSError {
                             
-                            hasAuthenticated = true
-                        })
-                    }
-                    
-                }else {
-                    if let error = error as? NSError {
-                        
-                        let message = self.errorMessageForLaErrorCode(errorCode: error.code)
-                        self.showAlert(with: "Error", andMessage: message)
+                            let message = self.errorMessageForLaErrorCode(errorCode: error.code)
+                            self.showAlert(with: "Error", andMessage: message)
+                        }
                     }
                 }
-                
             })
             
         }else {
@@ -56,6 +58,7 @@ class AuthenticationViewController: UIViewController {
         }
     }
     
+    //Possible touch id errors
     func errorMessageForLaErrorCode(errorCode: Int) -> String {
         
         var message = ""

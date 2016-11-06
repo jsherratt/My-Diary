@@ -52,17 +52,18 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate {
         //Position label text top left
         locationLabel.sizeToFit()
         
-        //Check if note exists
+        //Check if note exists. If there is a note configure the view with the note
         if let note = self.note {
             configureViewWith(note: note)
-        }else {
         }
     }
     
     //---------------------
     //MARK: Functions
     //---------------------
-    func configureViewWith(note: Note) {
+    
+    //Configue the view with a note
+    fileprivate func configureViewWith(note: Note) {
         
         noteTextView.text = note.text
         
@@ -101,7 +102,8 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate {
         }
     }
     
-    func addImageActionSheet() {
+    //Action sheet to allow the user to choose between taking a photo or picking a photo from the photo album
+    fileprivate func addImageActionSheet() {
         
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
@@ -132,7 +134,8 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate {
         self.present(actionSheet, animated: true, completion: nil)
     }
     
-    func updateCharacterLimitLabel() {
+    //Update the character limit text label when the user is typing
+    fileprivate func updateCharacterLimitLabel() {
         
         let characterLimitCount = "\(noteTextView.text.characters.count)" + "/\(noteTextViewLimit)"
         let textToChange = "\(noteTextView.text.characters.count)"

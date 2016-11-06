@@ -23,7 +23,7 @@
                                 <rect key="frame" x="0.0" y="28" width="320" height="100"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jC7-fO-hrj" id="A3n-XC-hwX">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="99"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icn_noimage" translatesAutoresizingMaskIntoConstraints="NO" id="40n-xp-cIi">
@@ -70,7 +70,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="izS-w2-YNc">
-                        <barButtonItem key="leftBarButtonItem" systemItem="edit" id="MVv-nR-sb8">
+                        <barButtonItem key="leftBarButtonItem" image="settingsBtn" id="MVv-nR-sb8">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <segue destination="SeX-I2-Cba" kind="show" id="8s8-P3-7pH"/>
@@ -86,7 +86,7 @@
                     <connections>
                         <outlet property="noteTableView" destination="Xob-ZV-ct1" id="7wh-BI-XfW"/>
                         <segue destination="Hca-tr-IPa" kind="show" identifier="ShowNote" id="XkO-SS-wh5"/>
-                        <segue destination="PN1-iB-BQY" kind="presentation" identifier="TouchID" animates="NO" modalPresentationStyle="fullScreen" id="cdi-iV-tgd"/>
+                        <segue destination="PN1-iB-BQY" kind="presentation" identifier="TouchID" animates="NO" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="cdi-iV-tgd"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vn7-TT-5Tb" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -318,11 +318,14 @@
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="SRF-Cn-tAB" id="mNV-W6-mch">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="L7e-fe-0Kr">
                                                     <rect key="frame" x="263" y="6" width="51" height="31"/>
+                                                    <connections>
+                                                        <action selector="setTouchID:" destination="SeX-I2-Cba" eventType="valueChanged" id="5Kj-gI-fKE"/>
+                                                    </connections>
                                                 </switch>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Use Touch ID" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uj0-Is-5u3">
                                                     <rect key="frame" x="18" y="11.5" width="102.5" height="20.5"/>
@@ -437,6 +440,7 @@
         <image name="addLocationIcon" width="30" height="30"/>
         <image name="addPhotoIcon" width="30" height="30"/>
         <image name="icn_noimage" width="47" height="47"/>
+        <image name="settingsBtn" width="20" height="20"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="lQp-GQ-dk8"/>

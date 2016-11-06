@@ -19,8 +19,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
+        //First time launch set UserDefauts
+        if !UserDefaults.standard.bool(forKey: "firstLaunch") {
+            
+            UserDefaults.standard.set(false, forKey: "useTouchID")
+            
+            UserDefaults.standard.set(true, forKey: "firstLaunch")
+            UserDefaults.standard.synchronize()
+        }
+        
+        //Customise status bar style
         UIApplication.shared.statusBarStyle = .lightContent
         
+        //Create dynamic 3d touch shortcut
         let newNoteShortcut = UIMutableApplicationShortcutItem(type: "NewNote",
                                                                localizedTitle: "Create New Note",
                                                                localizedSubtitle: nil,
@@ -58,6 +69,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         coreDataManager.saveContext()
     }
     
+    //Quick actions
     func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
         
         switch shortcutItem.type {

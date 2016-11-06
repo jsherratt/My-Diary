@@ -26,13 +26,15 @@ class LocationManager: NSObject {
         
         manager.delegate = self
         
-        //Get user permission
+        //Ask user permission
         getPermission()
     }
     
     //---------------------
     //MARK: Functions
     //---------------------
+    
+    //Ask user permission for location
     fileprivate func getPermission() {
         
         if CLLocationManager.authorizationStatus() == .notDetermined {
@@ -40,6 +42,7 @@ class LocationManager: NSObject {
         }
     }
     
+    //Get a location from coordinates
     func getPlacemark(forLocation location: CLLocation, completionHandler: @escaping (CLPlacemark?, String?) -> ()) {
         
         geoCoder.reverseGeocodeLocation(location, completionHandler: { placemarks, error in

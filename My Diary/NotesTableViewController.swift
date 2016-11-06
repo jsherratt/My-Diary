@@ -8,7 +8,6 @@
 
 import UIKit
 import CoreData
-import LocalAuthentication
 
 var hasAuthenticated = false
 
@@ -21,8 +20,7 @@ class NotesTableViewController: UITableViewController, UISearchBarDelegate {
     var selectedNote: Note?
     var notes: [Note] = []
     var searchController = UISearchController(searchResultsController: nil)
-    let authenticationContext = LAContext()
-    var error: NSError?
+    let userDefaults = UserDefaults.standard
     
     //---------------------
     //MARK: Outlets
@@ -63,19 +61,11 @@ class NotesTableViewController: UITableViewController, UISearchBarDelegate {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        //Touch ID
-        
-//        if authenticationContext.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
-//            
-//            if hasAuthenticated == false {
-//                performSegue(withIdentifier: "TouchID", sender: self)
-//            }
-//            
-//        }else {
-//            
-//            //No biometrics
-//            showAlert(with: "Error", andMessage: "This device does not have a Touch ID sensor")
-//        }
+        //Check if user has set touchID
+        if userDefaults.bool(forKey: "useTouchID") == true && hasAuthenticated == false {
+            
+            performSegue(withIdentifier: "TouchID", sender: self)
+        }
     }
     
     //---------------------
@@ -171,6 +161,9 @@ class NotesTableViewController: UITableViewController, UISearchBarDelegate {
         return 100
     }
     
+    //---------------------
+    //MARK: Segue
+    //---------------------
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == "ShowNote" {
@@ -187,9 +180,6 @@ class NotesTableViewController: UITableViewController, UISearchBarDelegate {
     }
 }
 
-//---------------------
-//MARK: Extensions
-//---------------------
 extension NotesTableViewController: NSFetchedResultsControllerDelegate {
     
     //-------------------------------
@@ -198,48 +188,6 @@ extension NotesTableViewController: NSFetchedResultsControllerDelegate {
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         
         noteTableView.reloadData()
-    }
-}
-
-extension NotesTableViewController: UISearchResultsUpdating {
-    
-    func updateSearchResults(for searchController: UISearchController) {
-        
-        if let searchText = searchController.searchBar.text {
-            self.notes = coreDataManager.searchNote(withText: searchText)
-        }
-        noteTableView.reloadData()
-    }
-}
-
-extension NotesTableViewController: UIViewControllerPreviewingDelegate {
-    
-    //Peek
-    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
-        
-        guard let indexPath = noteTableView.indexPathForRow(at: location), let cell = noteTableView.cellForRow(at: indexPath) else { return nil }
-        
-        guard let previewVc = storyboard?.instantiateViewController(withIdentifier: "PreviewVc") as? PreviewViewController else { return nil }
-        
-        previewVc.note = coreDataManager.fetchedResultsController.object(at: indexPath)
-        selectedNote = coreDataManager.fetchedResultsController.object(at: indexPath)
-        
-        previewVc.preferredContentSize = CGSize(width: 0, height: 0)
-        
-        previewingContext.sourceRect = cell.frame
-        
-        return previewVc
-    }
-    
-    //Pop
-    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
-        
-        if let previewVc = storyboard?.instantiateViewController(withIdentifier: "PreviewVc") as? PreviewViewController {
-            
-            previewVc.note = selectedNote
-            
-            show(previewVc, sender: self)
-        }
     }
 }
 

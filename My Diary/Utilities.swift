@@ -13,6 +13,7 @@ import UIKit
 //---------------------
 extension UIImageView {
     
+    //Round image for table view
     func roundImage() {
         
         self.layer.cornerRadius = self.frame.size.height/2
@@ -23,6 +24,7 @@ extension UIImageView {
 
 extension NSRange {
     
+    //Helper for character limit
     func range(for str: String) -> Range<String.Index>? {
         
         guard location != NSNotFound else { return nil }
@@ -38,6 +40,7 @@ extension NSRange {
 
 extension UIViewController {
     
+    //Show alert with a title and message
     func showAlert(with title: String, andMessage message: String) {
         
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)

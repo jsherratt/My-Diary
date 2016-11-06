@@ -30,6 +30,8 @@ class NoteCell: UITableViewCell {
     //---------------------
     //MARK: Functions
     //---------------------
+    
+    //Configure a cell with a note
     func configureCellWithNote(note: Note) {
         
         self.noteDateLabel.text = dateFormatter.string(from: note.date as Date)
