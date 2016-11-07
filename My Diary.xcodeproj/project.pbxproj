@@ -27,8 +27,6 @@
 		D48777A51DC96D5E00FED0D1 /* NoteDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D48777A41DC96D5E00FED0D1 /* NoteDetailViewController.swift */; };
 		D4B7EE421DCE92A3005C144F /* PreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B7EE411DCE92A3005C144F /* PreviewViewController.swift */; };
 		D4B810E81DCEA1BF00BD907D /* NotesTableViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B810E71DCEA1BF00BD907D /* NotesTableViewExtensions.swift */; };
-		D4C95AF31DCE8746003971D5 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C95AF21DCE8746003971D5 /* SettingsTableViewController.swift */; };
-		D4C95AF51DCE8BD0003971D5 /* AuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C95AF41DCE8BD0003971D5 /* AuthenticationViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,8 +64,6 @@
 		D48777A41DC96D5E00FED0D1 /* NoteDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteDetailViewController.swift; sourceTree = "<group>"; };
 		D4B7EE411DCE92A3005C144F /* PreviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewViewController.swift; sourceTree = "<group>"; };
 		D4B810E71DCEA1BF00BD907D /* NotesTableViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotesTableViewExtensions.swift; sourceTree = "<group>"; };
-		D4C95AF21DCE8746003971D5 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
-		D4C95AF41DCE8BD0003971D5 /* AuthenticationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -178,8 +174,6 @@
 				D4B810E71DCEA1BF00BD907D /* NotesTableViewExtensions.swift */,
 				D48777A41DC96D5E00FED0D1 /* NoteDetailViewController.swift */,
 				D4B7EE411DCE92A3005C144F /* PreviewViewController.swift */,
-				D4C95AF21DCE8746003971D5 /* SettingsTableViewController.swift */,
-				D4C95AF41DCE8BD0003971D5 /* AuthenticationViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -302,10 +296,8 @@
 				D40C83011DC9BA4000CF3D04 /* MediaPickerManager.swift in Sources */,
 				D40C83061DC9C1F900CF3D04 /* Note+CoreDataProperties.swift in Sources */,
 				D487779F1DC95E3100FED0D1 /* Utilities.swift in Sources */,
-				D4C95AF31DCE8746003971D5 /* SettingsTableViewController.swift in Sources */,
 				D40C830A1DC9C3FA00CF3D04 /* Note+CoreDataClass.swift in Sources */,
 				D40C83041DC9C0C900CF3D04 /* CoreDataManager.swift in Sources */,
-				D4C95AF51DCE8BD0003971D5 /* AuthenticationViewController.swift in Sources */,
 				D487779D1DC95BD300FED0D1 /* NoteCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

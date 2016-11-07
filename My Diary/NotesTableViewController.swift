@@ -9,8 +9,6 @@
 import UIKit
 import CoreData
 
-var hasAuthenticated = false
-
 class NotesTableViewController: UITableViewController, UISearchBarDelegate {
     
     //---------------------
@@ -20,7 +18,6 @@ class NotesTableViewController: UITableViewController, UISearchBarDelegate {
     var selectedNote: Note?
     var notes: [Note] = []
     var searchController = UISearchController(searchResultsController: nil)
-    let userDefaults = UserDefaults.standard
     
     //---------------------
     //MARK: Outlets
@@ -55,16 +52,6 @@ class NotesTableViewController: UITableViewController, UISearchBarDelegate {
         if traitCollection.forceTouchCapability == .available {
             registerForPreviewing(with: self, sourceView: self.tableView)
             print("Can use 3D touch")
-        }
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        //Check if user has set touchID
-        if userDefaults.bool(forKey: "useTouchID") == true && hasAuthenticated == false {
-            
-            performSegue(withIdentifier: "TouchID", sender: self)
         }
     }
     

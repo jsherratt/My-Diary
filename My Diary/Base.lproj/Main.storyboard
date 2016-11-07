@@ -23,7 +23,7 @@
                                 <rect key="frame" x="0.0" y="28" width="320" height="100"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jC7-fO-hrj" id="A3n-XC-hwX">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="99"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icn_noimage" translatesAutoresizingMaskIntoConstraints="NO" id="40n-xp-cIi">
@@ -70,12 +70,6 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="izS-w2-YNc">
-                        <barButtonItem key="leftBarButtonItem" image="settingsBtn" id="MVv-nR-sb8">
-                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <connections>
-                                <segue destination="SeX-I2-Cba" kind="show" id="8s8-P3-7pH"/>
-                            </connections>
-                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="e07-R4-20A">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
@@ -86,7 +80,6 @@
                     <connections>
                         <outlet property="noteTableView" destination="Xob-ZV-ct1" id="7wh-BI-XfW"/>
                         <segue destination="Hca-tr-IPa" kind="show" identifier="ShowNote" id="XkO-SS-wh5"/>
-                        <segue destination="PN1-iB-BQY" kind="presentation" identifier="TouchID" animates="NO" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="cdi-iV-tgd"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vn7-TT-5Tb" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -285,76 +278,6 @@
             </objects>
             <point key="canvasLocation" x="264" y="217"/>
         </scene>
-        <!--Authentication View Controller-->
-        <scene sceneID="6Z2-hp-RUo">
-            <objects>
-                <viewController id="PN1-iB-BQY" customClass="AuthenticationViewController" customModule="My_Diary" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Z6d-Qc-TjH"/>
-                        <viewControllerLayoutGuide type="bottom" id="IGx-hZ-P06"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Vbj-A4-11u">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="5jb-ox-M3a" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="263" y="903"/>
-        </scene>
-        <!--Settings Table View Controller-->
-        <scene sceneID="R0r-ur-0ub">
-            <objects>
-                <tableViewController id="SeX-I2-Cba" customClass="SettingsTableViewController" customModule="My_Diary" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="6gX-TO-DYy">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <sections>
-                            <tableViewSection id="dP2-YD-bPM">
-                                <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="Cell" id="SRF-Cn-tAB">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="SRF-Cn-tAB" id="mNV-W6-mch">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="L7e-fe-0Kr">
-                                                    <rect key="frame" x="263" y="6" width="51" height="31"/>
-                                                    <connections>
-                                                        <action selector="setTouchID:" destination="SeX-I2-Cba" eventType="valueChanged" id="5Kj-gI-fKE"/>
-                                                    </connections>
-                                                </switch>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Use Touch ID" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uj0-Is-5u3">
-                                                    <rect key="frame" x="18" y="11.5" width="102.5" height="20.5"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="uj0-Is-5u3" firstAttribute="centerY" secondItem="mNV-W6-mch" secondAttribute="centerY" id="TsU-Ha-I5e"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="L7e-fe-0Kr" secondAttribute="trailing" id="fvF-XW-VRb"/>
-                                                <constraint firstItem="L7e-fe-0Kr" firstAttribute="centerY" secondItem="mNV-W6-mch" secondAttribute="centerY" id="lGf-wy-OSW"/>
-                                                <constraint firstItem="uj0-Is-5u3" firstAttribute="leading" secondItem="mNV-W6-mch" secondAttribute="leadingMargin" constant="10" id="lRB-7u-cRe"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </cells>
-                            </tableViewSection>
-                        </sections>
-                        <connections>
-                            <outlet property="dataSource" destination="SeX-I2-Cba" id="jef-VQ-Lca"/>
-                            <outlet property="delegate" destination="SeX-I2-Cba" id="B4H-Jd-VCs"/>
-                        </connections>
-                    </tableView>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="74o-hn-9ec" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1944" y="904"/>
-        </scene>
         <!--Preview View Controller-->
         <scene sceneID="6Xb-lp-XtX">
             <objects>
@@ -440,7 +363,6 @@
         <image name="addLocationIcon" width="30" height="30"/>
         <image name="addPhotoIcon" width="30" height="30"/>
         <image name="icn_noimage" width="47" height="47"/>
-        <image name="settingsBtn" width="20" height="20"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="lQp-GQ-dk8"/>

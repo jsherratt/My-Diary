@@ -19,15 +19,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        //First time launch set UserDefauts
-        if !UserDefaults.standard.bool(forKey: "firstLaunch") {
-            
-            UserDefaults.standard.set(false, forKey: "useTouchID")
-            
-            UserDefaults.standard.set(true, forKey: "firstLaunch")
-            UserDefaults.standard.synchronize()
-        }
-        
         //Customise status bar style
         UIApplication.shared.statusBarStyle = .lightContent
         
