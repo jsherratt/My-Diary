@@ -105,6 +105,18 @@ public class CoreDataManager {
         self.saveContext()
     }
     
+    func deleteAllNotes() {
+        
+        let fetchRequest: NSFetchRequest<Note> = Note.fetchRequest()
+        let notes = try! self.managedObjectContext.fetch(fetchRequest)
+        
+        for note in notes {
+            
+            self.managedObjectContext.delete(note)
+            self.saveContext()
+        }
+    }
+    
     //----------------------
     //MARK: Searching
     //----------------------
