@@ -13,7 +13,7 @@ import CoreLocation
 
 class My_DiaryTests: XCTestCase {
     
-    //
+    
     let coreDataManager = CoreDataManager.sharedInstance
     
     //----------------------

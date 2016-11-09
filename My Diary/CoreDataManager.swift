@@ -50,7 +50,7 @@ public class CoreDataManager {
     //----------------------
     //MARK: Saving
     //----------------------
-    func saveContext () {
+    func saveContext() {
         
         if self.managedObjectContext.hasChanges {
             
