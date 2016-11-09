@@ -32,8 +32,7 @@ public class CoreDataManager {
     
     lazy var managedObjectContext: NSManagedObjectContext = {
         
-        let managedObjectContext = CoreDataManager.sharedInstance.persistentContainer.viewContext
-        return managedObjectContext
+        return self.persistentContainer.viewContext
     }()
     
     lazy var entityDescription: NSEntityDescription = {
@@ -43,7 +42,11 @@ public class CoreDataManager {
     
     lazy var fetchedResultsController: NSFetchedResultsController<Note> = {
         
-        let fetchedResultsController = NSFetchedResultsController(fetchRequest: Note.fetchRequest(), managedObjectContext: self.managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
+        let fetchRequest:NSFetchRequest = Note.fetchRequest()
+        let sortDescriptor = NSSortDescriptor(key: "date", ascending: false)
+        fetchRequest.sortDescriptors = [sortDescriptor]
+        
+        let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
         return fetchedResultsController
     }()
     
@@ -67,8 +70,7 @@ public class CoreDataManager {
     //Save note
     func saveNote(withText text: String, andImageData imageData: Data?, andLocation location: CLLocation?) {
         
-        let noteDescription = NSEntityDescription.entity(forEntityName: "Note", in: self.managedObjectContext)!
-        let note = Note(entity: noteDescription, insertInto: self.managedObjectContext)
+        let note = Note(context: self.managedObjectContext)
         
         if let imageData = imageData {
             note.image = imageData as NSData
@@ -79,7 +81,7 @@ public class CoreDataManager {
         }
         
         note.text = text
-        note.date = Date() as NSDate
+        note.date = NSDate()
         
         self.saveContext()
     }
@@ -87,8 +89,7 @@ public class CoreDataManager {
     //Save location
      func saveLocation(withLatitude latitude: Double, andLongitude longitude: Double, andNote note: Note) -> Location {
         
-        let entityDescription = NSEntityDescription.entity(forEntityName: "Location", in: self.managedObjectContext)!
-        let location = Location(entity: entityDescription, insertInto: self.managedObjectContext)
+        let location = Location(context: self.managedObjectContext)
         
         location.latitude = latitude
         location.longitude = longitude

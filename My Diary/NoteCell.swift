@@ -34,7 +34,7 @@ class NoteCell: UITableViewCell {
     //Configure a cell with a note
     func configureCellWithNote(note: Note) {
         
-        self.noteDateLabel.text = dateFormatter.string(from: note.date as Date)
+        self.noteDateLabel.text = dateFormatter.string(from: note.date as! Date)
         self.noteTextLabel.text = note.text
         
         if let image = note.image {
