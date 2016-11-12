@@ -21,7 +21,7 @@ class PreviewViewController: UIViewController {
     //Delete note preview action
     var previewActions: [UIPreviewActionItem] {
         
-        let item1 = UIPreviewAction(title: "DeleteNote", style: .default) { (action, vc) in
+        let item1 = UIPreviewAction(title: "Delete Note", style: .default) { (action, vc) in
             
             if let note = self.note {
                 self.coreDataManager.deleteNote(note: note)
