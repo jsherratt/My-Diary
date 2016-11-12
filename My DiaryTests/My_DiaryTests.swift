@@ -56,6 +56,8 @@ class My_DiaryTests: XCTestCase {
     //---------------------
     //MARK: Functions
     //---------------------
+    
+    //Create a fake note
     func createFakeNote() {
         
         let fakeNote = Note(entity: self.entityDescription, insertInto: self.managedObjectContext)
@@ -67,6 +69,7 @@ class My_DiaryTests: XCTestCase {
         coreDataManager.saveContext()
     }
     
+    //Delete a note
     func deleteNote() {
         
         if let note = self.coreDataManager.fetchedResultsController.fetchedObjects?.first {
@@ -119,12 +122,15 @@ class My_DiaryTests: XCTestCase {
         //Check if note was created
         XCTAssert(self.coreDataManager.fetchedResultsController.fetchedObjects?.count == 1, "Note was NOT created successfully")
         
+        //Change the note
         let note = coreDataManager.fetchedResultsController.fetchedObjects?.first
         note?.text = "Test Fake Note Changed"
         note?.date = NSDate()
         
+        //Save changes
         coreDataManager.saveContext()
         
+        //Check if note still exists
         XCTAssert(self.coreDataManager.fetchedResultsController.fetchedObjects?.count == 1, "Note was NOT changed successfully")
     }
     
